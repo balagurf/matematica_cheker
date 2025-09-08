@@ -1,0 +1,14 @@
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\MainWindow.baml
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\MainWindow.g.cs
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\App.g.cs
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.g.resources
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+D:\Projects\ReaperRepos\WpfApp1\bin\Debug\WpfApp1.exe.config
+D:\Projects\ReaperRepos\WpfApp1\bin\Debug\WpfApp1.exe
+D:\Projects\ReaperRepos\WpfApp1\bin\Debug\WpfApp1.pdb
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.exe
+D:\Projects\ReaperRepos\WpfApp1\obj\Debug\WpfApp1.pdb
