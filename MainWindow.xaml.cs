@@ -261,5 +261,86 @@ namespace GrammarChecker
             log = sb.ToString();
             return 0;
         }
+        private void OpenParsingPage_Click(object sender, RoutedEventArgs e)
+        {
+            ParsingPage page = new ParsingPage();
+            this.Content = page;
+        }
+
+        private void BuildTree_Click(object sender, RoutedEventArgs e)
+        {
+            var rules = ParseRules(TreeRulesInput.Text);
+            string target = TargetString.Text.Trim();
+
+            if (string.IsNullOrEmpty(target))
+            {
+                MessageBox.Show("Введите строку для вывода", "Ошибка");
+                return;
+            }
+
+            StringBuilder log = new StringBuilder();
+            bool success = TryDerive("S", target, rules, log, 0, 10);
+
+            if (success)
+                TreeOutput.Text = "Дерево вывода построено:\n\n" + log;
+            else
+                TreeOutput.Text = "Не удалось вывести строку: " + target;
+        }
+
+        private Dictionary<string, List<string>> ParseRules(string text)
+        {
+            var dict = new Dictionary<string, List<string>>();
+            var lines = text.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var line in lines)
+            {
+                var parts = line.Split(new[] { "->" }, StringSplitOptions.None);
+                if (parts.Length != 2) continue;
+
+                string left = parts[0].Trim();
+                string[] rights = parts[1].Split('|');
+
+                foreach (var r in rights)
+                {
+                    string right = r.Trim();
+                    if (!dict.ContainsKey(left))
+                        dict[left] = new List<string>();
+                    dict[left].Add(right);
+                }
+            }
+            return dict;
+        }
+
+        // Рекурсивная попытка вывести строку
+        private bool TryDerive(string current, string target,
+                               Dictionary<string, List<string>> rules,
+                               StringBuilder log, int depth, int maxDepth)
+        {
+            if (depth > maxDepth) return false;
+
+            string indent = new string(' ', depth * 2);
+            log.AppendLine($"{indent}{current}");
+
+            if (current == target) return true;
+
+            // если строка содержит нетерминалы — продолжаем подстановку
+            for (int i = 0; i < current.Length; i++)
+            {
+                char c = current[i];
+                if (char.IsUpper(c)) // нетерминал
+                {
+                    string left = c.ToString();
+                    if (!rules.ContainsKey(left)) continue;
+
+                    foreach (var right in rules[left])
+                    {
+                        string next = current.Substring(0, i) + right + current.Substring(i + 1);
+                        if (TryDerive(next, target, rules, log, depth + 1, maxDepth))
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
